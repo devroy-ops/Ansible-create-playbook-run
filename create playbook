@@ -1,0 +1,55 @@
+*******************start***************
+
+Note- Create playbook
+
+Step-1 vi target.yml ( Create playbook)
+
+
+
+--- # My first test file
+
+- hosts: demo
+  user: ansible
+  become: yes
+  connection: ssh
+  gather_facts: yes
+
+Step-2 ansible-playbook target.yml
+
+step-3  vi task.yml
+
+--- # My task book
+
+- hosts: all
+  user: ansible
+  become: yes
+  connection: ssh
+  tasks:
+          - name: install HTTPD on centos 7
+            action: yum name=httpd state=installed
+
+
+
+
+ 
+Step-4 vi variable.yml
+
+
+- hosts: demo
+  user: ansible
+  become: yes
+  connection: ssh
+  vars:
+          - pkgname: httpd
+  tasks:
+                   - name: install HTTPD erver on centos 7
+                     action: yum name='{{pkgname}}' state=installed
+
+
+
+
+Note:- 
+
+step-0 rm -rf * (Delete all file)
+
+**********************END**************************
